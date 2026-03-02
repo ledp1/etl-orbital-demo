@@ -1,10 +1,10 @@
 # ETL Pipeline — Orbital Simulation Data
 
-A small, production-style ETL pipeline that processes orbital parameters into analytics-ready Parquet. Built to demonstrate data engineering patterns from the [vocal script](../interview-vocal-script.md).
+A small, production-style ETL pipeline that processes orbital parameters into analytics-ready Parquet.
 
 ## What This Demonstrates
 
-| Skill (from resume/vocal script) | Where it shows up |
+| Skill | Where it shows up |
 |----------------------------------|-------------------|
 | **ETL pipelines** | Extract → Transform → Load flow |
 | **Data quality & validation** | `validate.py` — schema, nulls, range checks |
@@ -48,16 +48,10 @@ demo-etl-pipeline/
 └── requirements.txt
 ```
 
-## Interview Talking Points
+## Data Quality
 
-**"Can you walk me through a project?"**
+The pipeline runs validation before load: schema checks, null checks on critical columns, and range validation for physical constraints (e.g., eccentricity between 0 and 1). If any check fails, the pipeline stops and surfaces the failure. In production this could be extended with Great Expectations or dbt tests.
 
-"This is a small ETL pipeline I put together to show how I structure production data work. It ingests orbital simulation data—ties to my OSDR volunteer work—transforms it, runs validation checks for schema and physical constraints, and loads to Parquet. I containerized it with Docker and wired up GitHub Actions so the pipeline and tests run on every push. The validation layer is the same pattern I care about at Scale—making sure data feeding downstream systems is reliable."
+## Why Parquet?
 
-**"How do you handle data quality?"**
-
-"I use a validation layer that runs before load: schema checks, null checks on critical columns, and range validation for physical constraints—like eccentricity between 0 and 1. If any check fails, the pipeline stops and surfaces the failure. In production I'd extend this with something like Great Expectations or dbt tests."
-
-**"Why Parquet?"**
-
-"Columnar format, good compression, and native support in Glue, Redshift, Snowflake. It's what I'd use for analytics workloads in a data lake or warehouse."
+Columnar format, good compression, and native support in AWS Glue, Redshift, and Snowflake. Well-suited for analytics workloads in a data lake or warehouse.
