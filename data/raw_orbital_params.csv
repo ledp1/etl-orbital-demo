@@ -1,0 +1,6 @@
+object_id,semi_major_axis_km,eccentricity,inclination_deg,orbital_period_min
+ISS,6771,0.0001,51.6,93
+Hubble,6910,0.0003,28.5,97
+TESS,108000,0.55,37.0,1440
+JWST,1500000,0.97,0.0,525600
+Starlink-1,550,0.001,53.0,95
